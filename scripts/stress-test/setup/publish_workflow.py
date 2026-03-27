@@ -32,7 +32,7 @@ def publish_workflow() -> None:
     log.step(f"Publishing workflow for app: {app_id}")
 
     # API endpoint for publishing workflow
-    base_url = "http://localhost:5001"
+    base_url = "http://localhost"
     publish_endpoint = f"{base_url}/console/api/apps/{app_id}/workflows/publish"
 
     # Publish payload
@@ -95,7 +95,7 @@ def publish_workflow() -> None:
                 log.debug(f"Response: {response.text}")
 
     except httpx.ConnectError:
-        log.error("Could not connect to Dify API at http://localhost:5001")
+        log.error("Could not connect to Dify API at http://localhost")
         log.info("Make sure the API server is running with: ./dev/start-api")
     except Exception as e:
         log.error(f"An error occurred: {e}")

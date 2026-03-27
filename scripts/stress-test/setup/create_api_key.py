@@ -33,7 +33,7 @@ def create_api_key() -> None:
     log.step(f"Creating API key for app: {app_id}")
 
     # API endpoint for creating API key
-    base_url = "http://localhost:5001"
+    base_url = "http://localhost"
     api_key_endpoint = f"{base_url}/console/api/apps/{app_id}/api-keys"
 
     headers = {
@@ -103,7 +103,7 @@ def create_api_key() -> None:
                 log.debug(f"Response: {response.text}")
 
     except httpx.ConnectError:
-        log.error("Could not connect to Dify API at http://localhost:5001")
+        log.error("Could not connect to Dify API at http://localhost")
         log.info("Make sure the API server is running with: ./dev/start-api")
     except Exception as e:
         log.error(f"An error occurred: {e}")

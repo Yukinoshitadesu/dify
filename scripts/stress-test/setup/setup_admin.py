@@ -27,7 +27,7 @@ def setup_admin_account() -> None:
         log.info(f"Admin credentials saved to: {config_helper.get_config_path('benchmark_state')}")
 
     # API setup endpoint
-    base_url = "http://localhost:5001"
+    base_url = "http://localhost"
     setup_endpoint = f"{base_url}/console/api/setup"
 
     # Prepare setup payload
@@ -61,7 +61,7 @@ def setup_admin_account() -> None:
                 log.debug(f"Response: {response.text}")
 
     except httpx.ConnectError:
-        log.error("Could not connect to Dify API at http://localhost:5001")
+        log.error("Could not connect to Dify API at http://localhost")
         log.info("Make sure the API server is running with: ./dev/start-api")
     except Exception as e:
         log.error(f"An error occurred: {e}")
