@@ -28,7 +28,7 @@ def login_admin() -> None:
     log.info(f"Logging in with email: {admin_config['email']}")
 
     # API login endpoint
-    base_url = "http://localhost:5001"
+    base_url = "http://localhost"
     login_endpoint = f"{base_url}/console/api/login"
 
     # Prepare login payload
@@ -91,7 +91,7 @@ def login_admin() -> None:
                 log.debug(f"Response: {response.text}")
 
     except httpx.ConnectError:
-        log.error("Could not connect to Dify API at http://localhost:5001")
+        log.error("Could not connect to Dify API at http://localhost")
         log.info("Make sure the API server is running with: ./dev/start-api")
     except Exception as e:
         log.error(f"An error occurred: {e}")

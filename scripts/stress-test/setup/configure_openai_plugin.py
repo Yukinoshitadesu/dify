@@ -25,7 +25,7 @@ def configure_openai_plugin() -> None:
     log.step("Configuring OpenAI plugin with mock server...")
 
     # API endpoint for plugin configuration
-    base_url = "http://localhost:5001"
+    base_url = "http://localhost"
     config_endpoint = f"{base_url}/console/api/workspaces/current/model-providers/langgenius/openai/openai/credentials"
 
     # Configuration payload with mock server
@@ -87,7 +87,7 @@ def configure_openai_plugin() -> None:
                 log.debug(f"Response: {response.text}")
 
     except httpx.ConnectError:
-        log.error("Could not connect to Dify API at http://localhost:5001")
+        log.error("Could not connect to Dify API at http://localhost")
         log.info("Make sure the API server is running with: ./dev/start-api")
     except Exception as e:
         log.error(f"An error occurred: {e}")

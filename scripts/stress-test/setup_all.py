@@ -77,7 +77,7 @@ def main() -> None:
     log.step("Checking required services...")
     log.separator()
 
-    dify_running = check_port("localhost", 5001, "Dify API server")
+    dify_running = check_port("localhost", 80, "Dify API server")
     if not dify_running:
         log.info("To start Dify API server:")
         log.list_item("Run: ./dev/start-api")
