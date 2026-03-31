@@ -1,0 +1,44 @@
+# 使用 Python 3.11 作為基礎映像檔
+FROM python:3.11-slim
+
+# 設定工作目錄
+WORKDIR /app
+
+# 安裝系統依賴 (Playwright 需要的系統庫)
+RUN apt-get update && apt-get install -y \
+    libglib2.0-0 \
+    libnss3 \
+    libnspr4 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libdbus-1-3 \
+    libxcb1 \
+    libxkbcommon0 \
+    libx11-6 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libpango-1.0-0 \
+    libcairo2 \
+    libasound2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 安裝 Python 套件
+RUN pip install --no-cache-dir fastapi uvicorn playwright python-multipart
+
+# 安裝 Playwright 瀏覽器 (僅安裝 chromium)
+RUN playwright install chromium
+
+# 複製服務程式碼
+COPY threads_playwright_service.py .
+
+# 開放連接埠
+EXPOSE 8000
+
+# 啟動指令
+CMD ["python", "threads_playwright_service.py"]
